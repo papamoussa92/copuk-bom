@@ -1,0 +1,8 @@
+image: de.icr.io/sis-id/sis/ci-java-node:java17-node16-latest
+
+include:
+  - project: 'sis/common-files'
+    ref: current
+    file: '/gitlab-ci/artifact/gitlab-ci-artifact-no-sonar-java17.yml'
+
+

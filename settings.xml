@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                          https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <servers>
+        <server>
+            <id>snapshots</id>
+            <username>${env.NEXUS_MAVEN_USERNAME}</username>
+            <password>${env.NEXUS_MAVEN_PASSWORD}</password>
+        </server>
+        <server>
+            <id>releases</id>
+            <username>${env.NEXUS_MAVEN_USERNAME}</username>
+            <password>${env.NEXUS_MAVEN_PASSWORD}</password>
+        </server>
+    </servers>
+    <profiles>
+        <profile>
+            <id>sis-nexus</id>
+            <repositories>
+                <repository>
+                    <id>snapshots</id>
+                    <name>sis Snapshots</name>
+                    <releases>
+                        <enabled>false</enabled>
+                        <updatePolicy>always</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                        <checksumPolicy>fail</checksumPolicy>
+                    </snapshots>
+                    <url>https://nexus.in.sis-id.com/repository/maven-snapshots</url>
+                    <layout>default</layout>
+                </repository>
+                <repository>
+                    <id>releases</id>
+                    <name>sis releases</name>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                        <checksumPolicy>fail</checksumPolicy>
+                    </snapshots>
+                    <url>https://nexus.in.sis-id.com/repository/maven-releases</url>
+                    <layout>default</layout>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>sis-nexus</activeProfile>
+    </activeProfiles>
+</settings>
