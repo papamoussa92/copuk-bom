@@ -1,0 +1,150 @@
+ <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>fr.sis.sisid</groupId>
+  <artifactId>copuk-bom</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Bill of materials for CoPUK related projects</name>
+  
+  <properties>
+    <!-- internal dependencies -->
+    <copuk-shared.version>0.0.18</copuk-shared.version>
+    <copuk-namematching.version>0.0.10</copuk-namematching.version>
+    <!-- runtime --> 
+    <spring-boot.version>2.7.3</spring-boot.version>
+    <old-httpclient.version>4.5.13</old-httpclient.version>
+    <httpclient.version>5.1.3</httpclient.version>
+    <liquibase-core.version>4.15.0</liquibase-core.version>
+    <spring-tx.version>5.3.20</spring-tx.version>
+    <bouncycastle.version>1.71</bouncycastle.version>
+    <nimbus-jose.version>9.23</nimbus-jose.version>
+    <!-- test related -->
+    <cucumber.version>7.4.1</cucumber.version>
+    <mockserver.version>1.16.3</mockserver.version>
+    <testcontainers.version>1.17.1</testcontainers.version>
+    <mockserver-client.version>5.13.2</mockserver-client.version>
+    <testcontainer-postgresql.version>1.17.1</testcontainer-postgresql.version>
+    <keycloak-testcontainer.version>2.2.1</keycloak-testcontainer.version>    
+  </properties>
+  
+  <dependencyManagement>
+    <dependencies>
+      <!-- internal dependencies -->
+      <dependency>
+          <groupId>fr.sis.sisid</groupId>
+          <artifactId>copuk-shared</artifactId>
+          <version>${copuk-shared.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>fr.sis.sisid</groupId>
+          <artifactId>copuk-namematching</artifactId>
+          <version>${copuk-namematching.version}</version>
+      </dependency>
+      <!-- runtime -->
+      <!-- TODO : use httpclient5 when possible -->
+      <!-- stop fixing httpclient version, should be managed by spring -->
+      <dependency>
+          <groupId>org.apache.httpcomponents</groupId>
+          <artifactId>httpclient</artifactId>
+          <version>${old-httpclient.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.httpcomponents.client5</groupId>
+          <artifactId>httpclient5</artifactId>
+          <version>${httpclient.version}</version>
+      </dependency>
+      <!-- TODO : stop fixing liquibase version, should be managed by spring-->
+      <dependency>
+          <groupId>org.liquibase</groupId>
+          <artifactId>liquibase-core</artifactId>
+          <version>${liquibase-core.version}</version>
+      </dependency>
+      <!-- TODO : stop fixing this version, should be managed by spring-->
+      <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring-tx.version}</version>
+        </dependency>
+      <dependency>
+          <groupId>org.bouncycastle</groupId>
+          <artifactId>bcprov-jdk18on</artifactId>
+          <version>${bouncycastle.version}</version>      
+      </dependency>
+      <dependency>
+          <groupId>org.bouncycastle</groupId>
+          <artifactId>bcpkix-jdk18on</artifactId>
+          <version>${bouncycastle.version}</version>            
+      </dependency>
+      <dependency>
+          <groupId>com.nimbusds</groupId>
+          <artifactId>nimbus-jose-jwt</artifactId>
+          <version>${nimbus-jose.version}</version>
+      </dependency>
+      <!-- test related -->
+       <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-spring</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mock-server</groupId>
+            <artifactId>mockserver-client-java</artifactId>
+            <version>${mockserver-client.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>mockserver</artifactId>
+            <version>${mockserver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${testcontainers.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${testcontainer-postgresql.version}</version>            
+        </dependency>
+        <dependency>
+          <groupId>com.github.dasniko</groupId>
+          <artifactId>testcontainers-keycloak</artifactId>
+          <version>${keycloak-testcontainer.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>${spring-boot.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>    
+  </dependencyManagement>
+  
+  <scm>
+      <url>https://git.in.sis-id.com/sis/shared-security-test.git</url>
+      <connection>scm:git:git://git.in.sis-id.com/sis/shared-security-test.git</connection>
+      <developerConnection>scm:git:git@git.in.sis-id.com:sis/shared-security-test.git</developerConnection>
+  </scm>
+  <distributionManagement>
+      <repository>
+          <id>releases</id>
+          <url>https://nexus.in.sis-id.com/repository/maven-releases/</url>
+      </repository>
+      <snapshotRepository>
+          <id>snapshots</id>
+          <url>https://nexus.in.sis-id.com/repository/maven-snapshots/</url>
+      </snapshotRepository>
+  </distributionManagement>
+  
+</project>
