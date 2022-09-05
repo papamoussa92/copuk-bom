@@ -2,18 +2,16 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>fr.sis.sisid</groupId>
   <artifactId>copuk-bom</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2</version>
   <packaging>pom</packaging>
   <name>Bill of materials for CoPUK related projects</name>
   
   <properties>
     <!-- internal dependencies -->
-    <copuk-shared.version>0.0.20</copuk-shared.version>
+    <copuk-shared.version>0.0.21</copuk-shared.version>
     <copuk-namematching.version>0.0.10</copuk-namematching.version>
     <!-- runtime --> 
     <spring-boot.version>2.7.3</spring-boot.version>
-    <old-httpclient.version>4.5.13</old-httpclient.version>
-    <httpclient.version>5.1.3</httpclient.version>
     <liquibase-core.version>4.15.0</liquibase-core.version>
     <spring-tx.version>5.3.20</spring-tx.version>
     <bouncycastle.version>1.71</bouncycastle.version>
@@ -39,20 +37,7 @@
           <groupId>fr.sis.sisid</groupId>
           <artifactId>copuk-namematching</artifactId>
           <version>${copuk-namematching.version}</version>
-      </dependency>
-      <!-- runtime -->
-      <!-- TODO : use httpclient5 when possible -->
-      <!-- stop fixing httpclient version, should be managed by spring -->
-      <dependency>
-          <groupId>org.apache.httpcomponents</groupId>
-          <artifactId>httpclient</artifactId>
-          <version>${old-httpclient.version}</version>
-      </dependency>
-      <dependency>
-          <groupId>org.apache.httpcomponents.client5</groupId>
-          <artifactId>httpclient5</artifactId>
-          <version>${httpclient.version}</version>
-      </dependency>
+      </dependency>     
       <!-- TODO : stop fixing liquibase version, should be managed by spring-->
       <dependency>
           <groupId>org.liquibase</groupId>
