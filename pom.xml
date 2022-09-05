@@ -8,7 +8,7 @@
   
   <properties>
     <!-- internal dependencies -->
-    <copuk-shared.version>0.0.18</copuk-shared.version>
+    <copuk-shared.version>0.0.20</copuk-shared.version>
     <copuk-namematching.version>0.0.10</copuk-namematching.version>
     <!-- runtime --> 
     <spring-boot.version>2.7.3</spring-boot.version>
