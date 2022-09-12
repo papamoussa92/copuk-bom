@@ -9,7 +9,7 @@
   <properties>
     <!-- internal dependencies -->
     <copuk-shared.version>0.0.21</copuk-shared.version>
-    <copuk-namematching.version>0.0.10</copuk-namematching.version>
+    <copuk-namematching.version>0.0.11</copuk-namematching.version>
     <!-- runtime --> 
     <spring-boot.version>2.7.3</spring-boot.version>
     <liquibase-core.version>4.15.0</liquibase-core.version>
