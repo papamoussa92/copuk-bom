@@ -5,17 +5,20 @@ include:
     ref: current
     file: '/gitlab-ci/artifact/gitlab-ci-artifact-no-sonar-java17.yml'
 
-stages:
-- ".pre"
-- update-dependency
-- qa
-- deploy-nexus
-- ".post"
-
-update-shared-version:
-  stage: update-dependency
+deploy-nexus-snapshots:
+  stage: deploy-nexus
+  environment:
+    name: nexus-snapshots
+    url: https://nexus.in.sis-id.com/#browse/browse/components:maven-snapshots
   rules:
-  - if: $CI_PIPELINE_SOURCE == "pipeline" && $DEPENDENCY == "copuk-shared.version"
+  - if: $CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_REF_NAME =~ /^(feature|fix)\/(SIS|PUK)\-.*$/
   script: |
-    DEPENDENCY_VERSION="$(echo $BRANCH_NAME | cut -d'/' -f2)-SNAPSHOT"
-    ./mvnw versions:set-property -Dproperty=${DEPENDENCY} -DgenerateBackupPoms=false -DnewVersion=${DEPENDENCY_VERSION}
+    CURRENT_VERSION="$(echo $CI_COMMIT_REF_NAME | cut -d'/' -f2)-SNAPSHOT"    
+    if [$CI_PIPELINE_SOURCE == "pipeline"]
+    then
+        DEPENDENCY_VERSION="$(echo $BRANCH_NAME | cut -d'/' -f2)-SNAPSHOT"
+        ./mvnw versions:set-property -Dproperty=${DEPENDENCY} -DgenerateBackupPoms=false -DnewVersion=${DEPENDENCY_VERSION}
+    fi 
+    ./mvnw -q -DskipTests versions:set -DnewVersion=${CURRENT_VERSION}
+    ./mvnw -q -DskipTests clean deploy
+
