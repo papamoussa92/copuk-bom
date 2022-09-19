@@ -5,4 +5,17 @@ include:
     ref: current
     file: '/gitlab-ci/artifact/gitlab-ci-artifact-no-sonar-java17.yml'
 
+stages:
+- ".pre"
+- update-dependency
+- qa
+- deploy-nexus
+- ".post"
 
+update-shared-version:
+  stage: update-dependency
+  rules:
+  - if: $CI_PIPELINE_SOURCE == "pipeline" && $DEPENDENCY == "copuk-shared.version"
+  script: |
+    DEPENDENCY_VERSION="$(echo $BRANCH_NAME | cut -d'/' -f2)-SNAPSHOT"
+    - "./mvnw versions:set-property -Dproperty=${DEPENDENCY} -DgenerateBackupPoms=false -DnewVersion=${DEPENDENCY-VERSION}"
