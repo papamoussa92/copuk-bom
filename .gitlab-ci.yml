@@ -14,7 +14,7 @@ deploy-nexus-snapshots:
   - if: $CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_REF_NAME =~ /^(feature|fix)\/(SIS|PUK)\-.*$/
   script: |
     CURRENT_VERSION="$(echo $CI_COMMIT_REF_NAME | cut -d'/' -f2)-SNAPSHOT"    
-    if [$CI_PIPELINE_SOURCE == "pipeline"]
+    if [$CI_PIPELINE_SOURCE=="pipeline"]
     then
         DEPENDENCY_VERSION="$(echo $BRANCH_NAME | cut -d'/' -f2)-SNAPSHOT"
         ./mvnw versions:set-property -Dproperty=${DEPENDENCY} -DgenerateBackupPoms=false -DnewVersion=${DEPENDENCY_VERSION}
