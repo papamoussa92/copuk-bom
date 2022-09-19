@@ -17,5 +17,5 @@ update-shared-version:
   rules:
   - if: $CI_PIPELINE_SOURCE == "pipeline" && $DEPENDENCY == "copuk-shared.version"
   script: |
-    DEPENDENCY_VERSION="$(echo ${BRANCH_NAME} | cut -d'/' -f2)-SNAPSHOT"
-    - "./mvnw versions:set-property -Dproperty=${DEPENDENCY} -DgenerateBackupPoms=false -DnewVersion=${DEPENDENCY-VERSION}"
+    DEPENDENCY_VERSION="$(echo $BRANCH_NAME | cut -d'/' -f2)-SNAPSHOT"
+    ./mvnw versions:set-property -Dproperty=${DEPENDENCY} -DgenerateBackupPoms=false -DnewVersion=${DEPENDENCY-VERSION}
