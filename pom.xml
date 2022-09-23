@@ -2,15 +2,15 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>fr.sis.sisid</groupId>
   <artifactId>copuk-bom</artifactId>
-  <version>0.0.6</version>
+  <version>0.0.7</version>
   <packaging>pom</packaging>
   <name>Bill of materials for CoPUK related projects</name>
   
   <properties>
     <!-- internal dependencies -->
-    <copuk-shared.version>0.0.24</copuk-shared.version>
+    <copuk-shared.version>0.0.25</copuk-shared.version>
     <copuk-namematching.version>0.0.12</copuk-namematching.version>
-    <!-- runtime --> 
+    <!-- runtime -->
     <spring-boot.version>2.7.3</spring-boot.version>
     <liquibase-core.version>4.15.0</liquibase-core.version>
     <spring-tx.version>5.3.20</spring-tx.version>
